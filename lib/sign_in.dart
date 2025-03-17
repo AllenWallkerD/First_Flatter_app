@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'styles/signinStyles.dart';
+import './components/continue_button.dart';
+import './db/user_data.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
   @override
-  _SignInState createState() => _SignInState();
+  State<SignIn> createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
   final TextEditingController _emailController = TextEditingController();
+  String? _errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -22,42 +25,54 @@ class _SignInState extends State<SignIn> {
           children: [
             const Text("Sign in", style: SignInStyles.titleTextStyle),
             SignInStyles.largeSpacing,
-            _buildEmailInput(),
+            _buildEmailInput(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildEmailInput() {
+  Widget _buildEmailInput(BuildContext context) {
     return Column(
-      key: const ValueKey("email"),
       children: [
-        SizedBox(
-          width: double.infinity,
-          child: TextField(
-            controller: _emailController,
-            decoration: SignInStyles.inputDecoration.copyWith(hintText: "Email Address"),
+        TextField(
+          controller: _emailController,
+          decoration: SignInStyles.inputDecoration.copyWith(
+            hintText: "Email Address",
+            errorText: _errorMessage,
           ),
         ),
         SignInStyles.spacing,
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: SignInStyles.primaryButtonStyle,
-            child: const Text("Continue", style: SignInStyles.buttonTextStyle),
-          ),
+
+        ContinueButton(
+          text: "Continue",
+          onPressed: () {
+            final email = _emailController.text.trim();
+
+            if (email.isEmpty) {
+              setState(() => _errorMessage = "Please enter your email");
+              return;
+            }
+
+            if (!userDatabase.containsKey(email)) {
+              setState(() => _errorMessage = "Email not found. Create an account");
+              return;
+            }
+
+            Navigator.pushNamed(context, '/signInPassword', arguments: email);
+          },
         ),
         SignInStyles.spacing,
+
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Don't have an account? ", style: SignInStyles.normalTextStyle),
             InkWell(
-              onTap: () {},
-              borderRadius: BorderRadius.circular(4),
-                child: Text("Create One", style: SignInStyles.linkTextStyle),
+              onTap: () => Navigator.pushNamed(context, '/createAccount'),
+              child: const Text(
+                "Create One",
+                style: SignInStyles.linkTextStyle,
+              ),
             ),
           ],
         ),
