@@ -66,7 +66,7 @@ class _SignInPasswordState extends State<SignInPassword> {
 
             final user = userDatabase[email];
             if (user != null && user.password == pwd) {
-              Navigator.pushNamed(context, '/about');
+              Navigator.pushNamed(context, '/home');
             } else {
               setState(() => _errorMessage = "Incorrect password");
             }

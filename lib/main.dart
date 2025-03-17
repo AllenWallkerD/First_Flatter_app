@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 // Pages
 import 'sign_in.dart';
 import 'sign_in_password.dart'; 
-import 'about.dart';
+import 'home.dart';
 import 'create_account.dart';
 import 'forgot_password.dart';
 import 'reset_password.dart';
+import 'about.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/forgotPassword': (context) => const ForgotPassword(),
         '/resetPassword': (context) => const ResetPassword(),
         '/about': (context) => const AboutPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }

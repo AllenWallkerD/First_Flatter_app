@@ -103,6 +103,6 @@ class _CreateAccountState extends State<CreateAccount> {
       password: password,
     );
 
-    Navigator.pushNamed(context, '/signIn');
+    Navigator.pushNamed(context, '/about');
   }
 }
