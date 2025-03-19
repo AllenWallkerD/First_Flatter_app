@@ -57,7 +57,7 @@ class _SignInState extends State<SignIn> {
             InkWell(
               onTap: () {},
               borderRadius: BorderRadius.circular(4),
-                child: Text("Create One", style: SignInStyles.linkTextStyle),
+                child: const Text("Create One", style: SignInStyles.linkTextStyle),
             ),
           ],
         ),
