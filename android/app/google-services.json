@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "179088526879",
+    "project_id": "clot-3348f",
+    "storage_bucket": "clot-3348f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179088526879:android:57d2ec28a8202d2e350f2a",
+        "android_client_info": {
+          "package_name": "com.almas.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOFJl1vAWOXTpV3mUITrYGV_W1XGT-Nsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179088526879:android:ac346232ca091bec350f2a",
+        "android_client_info": {
+          "package_name": "com.almas.clot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOFJl1vAWOXTpV3mUITrYGV_W1XGT-Nsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.example.app
+package com.almas.clot
 
 import io.flutter.embedding.android.FlutterActivity
 

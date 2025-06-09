@@ -1,14 +1,16 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'styles/signinStyles.dart';
+import '../../styles/signinStyles.dart';
 
-class AboutPage extends StatefulWidget {
-  const AboutPage({Key? key}) : super(key: key);
+@RoutePage()
+class About extends StatefulWidget {
+  const About({Key? key}) : super(key: key);
 
   @override
-  State<AboutPage> createState() => _AboutPageState();
+  State<About> createState() => _AboutState();
 }
 
-class _AboutPageState extends State<AboutPage> {
+class _AboutState extends State<About> {
   bool? isMenSelected;
   String? selectedAgeRange;
   String? _errorMessage;
@@ -118,7 +120,7 @@ class _AboutPageState extends State<AboutPage> {
           child: ElevatedButton(
             style: SignInStyles.primaryButtonStyle,
             onPressed: _onFinish,
-            child: Text(
+            child: const Text(
               "Finish",
               style: SignInStyles.buttonTextStyle,
             ),
