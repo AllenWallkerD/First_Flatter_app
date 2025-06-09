@@ -14,6 +14,7 @@ class SignInStyles {
 
   static const TextStyle linkTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
+    fontSize: 12,
   );
 
   static const TextStyle normalTextStyle = TextStyle(
