@@ -8,6 +8,7 @@ import '../features/auth/forgot_password.dart';
 import '../features/auth/reset_password.dart';
 import '../features/home/home.dart';
 import '../features/home/about.dart';
+import '../features/home/category/categories_list.dart';
 
 part 'app_router.gr.dart';
 
@@ -47,6 +48,10 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: '/about',
       page: AboutRoute.page,
+    ),
+    AutoRoute(
+      path: '/categories-list',
+      page: CategoriesListRoute.page,
     ),
   ];
 }

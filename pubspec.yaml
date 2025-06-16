@@ -27,6 +27,10 @@ dependencies:
   # Navigation
   auto_route: ^7.9.0
 
+  # State Management
+  flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -38,4 +42,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
+    - assets/api/categories.json
+    - assets/images/Splash.png
+    - assets/images/categories/

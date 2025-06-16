@@ -35,66 +35,54 @@ class _SignInPasswordState extends State<SignInPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.router.pop(),
-        ),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: SignInStyles.formPadding,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Padding(
+        padding: SignInStyles.formPadding,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text("Enter Password", style: SignInStyles.titleTextStyle),
+            SignInStyles.largeSpacing,
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: SignInStyles.inputDecoration.copyWith(
+                hintText: "Password",
+                errorText: _errorMessage,
+              ),
+            ),
+            SignInStyles.spacing,
+            ContinueButton(
+              text: "Sign In",
+              onPressed: () async {
+                final pwd = _passwordController.text.trim();
+                if (pwd.isEmpty) {
+                  setState(() => _errorMessage = "Please enter your password");
+                  return;
+                }
+                try {
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    email: widget.email,
+                    password: pwd,
+                  );
+                  context.router.replace(const HomePageRoute());
+                } on FirebaseAuthException catch (e) {
+                  setState(() => _errorMessage = _mapErrorCode(e));
+                }
+              },
+            ),
+            SignInStyles.spacing,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Enter Password", style: SignInStyles.titleTextStyle),
-                SignInStyles.largeSpacing,
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: SignInStyles.inputDecoration.copyWith(
-                    hintText: "Password",
-                    errorText: _errorMessage,
-                  ),
-                ),
-                SignInStyles.spacing,
-                ContinueButton(
-                  text: "Sign In",
-                  onPressed: () async {
-                    final pwd = _passwordController.text.trim();
-                    if (pwd.isEmpty) {
-                      setState(() => _errorMessage = "Please enter your password");
-                      return;
-                    }
-                    try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: widget.email,
-                        password: pwd,
-                      );
-                      context.router.replace(const HomePageRoute());
-                    } on FirebaseAuthException catch (e) {
-                      setState(() => _errorMessage = _mapErrorCode(e));
-                    }
-                  },
-                ),
-                SignInStyles.spacing,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Forgot Password? ", style: SignInStyles.normalTextStyle),
-                    InkWell(
-                      onTap: () => context.router.push(const ForgotPasswordRoute()),
-                      child: const Text("Reset", style: SignInStyles.linkTextStyle),
-                    ),
-                  ],
+                const Text("Forgot Password? ", style: SignInStyles.normalTextStyle),
+                InkWell(
+                  onTap: () => context.router.push(const ForgotPasswordRoute()),
+                  child: const Text("Reset", style: SignInStyles.linkTextStyle),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );
