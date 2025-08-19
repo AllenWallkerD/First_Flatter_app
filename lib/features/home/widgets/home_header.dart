@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../router/app_router.dart';
+import '../../../bloc/user_profile/user_profile_bloc.dart';
+import '../../../bloc/user_profile/user_profile_state.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
@@ -10,7 +13,7 @@ class HomeHeader extends StatefulWidget {
 }
 
 class _HomeHeaderState extends State<HomeHeader> {
-  String selectedGender = 'Men'; // Track selected gender
+  String selectedGender = 'Men';
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +22,24 @@ class _HomeHeaderState extends State<HomeHeader> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Profile avatar
-          InkWell(
-            onTap: () {
-              context.router.push(const ProfileRoute());
+          BlocBuilder<UserProfileBloc, UserProfileState>(
+            builder: (context, state) {
+              return InkWell(
+                onTap: () {
+                  context.router.push(const ProfileRoute());
+                },
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.grey[300],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: _buildAvatarImage(state),
+                  ),
+                ),
+              );
             },
-            child: const CircleAvatar(
-              radius: 20,
-              backgroundImage: AssetImage('assets/images/profile_placeholder.png'),
-            ),
           ),
 
-          // Gender dropdown
           DropdownButton<String>(
             value: selectedGender,
             icon: const Icon(Icons.keyboard_arrow_down),
@@ -40,8 +49,6 @@ class _HomeHeaderState extends State<HomeHeader> {
                 setState(() {
                   selectedGender = newValue;
                 });
-                // You might want to trigger some state management here
-                // to update the products based on gender selection
               }
             },
             items: <String>['Men', 'Women', 'Kids', 'Unisex']
@@ -53,7 +60,6 @@ class _HomeHeaderState extends State<HomeHeader> {
             }).toList(),
           ),
 
-          // Cart icon
           InkWell(
             onTap: () {
               context.router.push(const CartRoute());
@@ -70,5 +76,60 @@ class _HomeHeaderState extends State<HomeHeader> {
         ],
       ),
     );
+  }
+
+  Widget _buildAvatarImage(UserProfileState state) {
+    if (state is UserProfileLoaded) {
+      return Image.network(
+        state.userProfile.profileImage,
+        width: 40,
+        height: 40,
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Container(
+            width: 40,
+            height: 40,
+            color: Colors.grey[200],
+            child: Center(
+              child: SizedBox(
+                width: 16,
+                height: 16,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[400]!),
+                ),
+              ),
+            ),
+          );
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            width: 40,
+            height: 40,
+            color: Colors.grey[300],
+            child: Icon(
+              Icons.person,
+              size: 24,
+              color: Colors.grey[600],
+            ),
+          );
+        },
+      );
+    } else {
+      return Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Icon(
+          Icons.person,
+          size: 24,
+          color: Colors.grey[600],
+        ),
+      );
+    }
   }
 }

@@ -1,85 +1,38 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../api/user.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/user_profile/user_profile_bloc.dart';
+import '../../bloc/user_profile/user_profile_event.dart';
+import '../../bloc/user_profile/user_profile_state.dart';
 import '../../models/user_model.dart';
 import './styles/profile_styles.dart';
 import '../../router/app_router.dart';
 
 @RoutePage()
-class Profile extends StatefulWidget {
+class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
-
-  @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  late final UserApiService _userApiService;
-  UserProfile? _userProfile;
-  bool _isLoading = true;
-  String? _errorMessage;
-
-  @override
-  void initState() {
-    super.initState();
-    _userApiService = UserApiService();
-    _fetchUserProfile();
-  }
-
-  @override
-  void dispose() {
-    _userApiService.dispose();
-    super.dispose();
-  }
-
-  Future<void> _fetchUserProfile() async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    final result = await _userApiService.getRandomUser();
-
-    setState(() {
-      _isLoading = false;
-      if (result.success) {
-        _userProfile = result.data;
-        _errorMessage = null;
-      } else {
-        _errorMessage = result.errorMessage;
-        _userProfile = null;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProfileStyles.backgroundColor,
       body: SafeArea(
-        child: _isLoading
-            ? _buildLoadingState()
-            : _errorMessage != null
-            ? _buildErrorState()
-            : _buildProfileContent(),
+        child: BlocBuilder<UserProfileBloc, UserProfileState>(
+          builder: (context, state) {
+            if (state is UserProfileLoaded) {
+              return _buildProfileContent(context, state.userProfile);
+            } else if (state is UserProfileError) {
+              return _buildErrorState(context, state.message);
+            } else {
+              return _buildNotSignedInState(context);
+            }
+          },
+        ),
       ),
     );
   }
 
-  Widget _buildLoadingState() {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(ProfileStyles.textPrimaryColor),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildErrorState() {
+  Widget _buildNotSignedInState(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -87,34 +40,11 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Failed to load profile',
+              'No Profile Data',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.grey[600],
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              _errorMessage ?? 'Unknown error occurred',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[500],
-              ),
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton.icon(
-              onPressed: _fetchUserProfile,
-              icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ProfileStyles.textPrimaryColor,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
               ),
             ),
           ],
@@ -123,9 +53,56 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildProfileContent() {
-    if (_userProfile == null) return const SizedBox.shrink();
+  Widget _buildErrorState(BuildContext context, String errorMessage) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 80,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Profile Error',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              errorMessage,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[500],
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () => context.router.replaceAll([const SignInRoute()]),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ProfileStyles.textPrimaryColor,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text('Back to Sign In'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
+  Widget _buildProfileContent(BuildContext context, UserProfile userProfile) {
     return Padding(
       padding: ProfileStyles.screenPadding,
       child: Column(
@@ -140,7 +117,7 @@ class _ProfileState extends State<Profile> {
             ),
             child: ClipOval(
               child: Image.network(
-                _userProfile!.profileImage,
+                userProfile.profileImage,
                 width: ProfileStyles.profileImageSize,
                 height: ProfileStyles.profileImageSize,
                 fit: BoxFit.cover,
@@ -158,12 +135,12 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _userProfile!.fullName,
+                  userProfile.fullName,
                   style: ProfileStyles.nameTextStyle,
                 ),
                 ProfileStyles.smallSpacing,
                 Text(
-                  _userProfile!.email,
+                  userProfile.email,
                   style: ProfileStyles.emailTextStyle,
                 ),
               ],
@@ -172,33 +149,44 @@ class _ProfileState extends State<Profile> {
 
           ProfileStyles.sectionSpacing,
 
+          // Menu Items
           _buildMenuItem(
             title: "Wishlist",
-            onTap: () {},
+            onTap: () {
+              // Navigate to wishlist
+              // context.router.push(const WishlistRoute());
+            },
           ),
 
           ProfileStyles.menuSpacing,
 
           _buildMenuItem(
             title: "Payment",
-            onTap: () {},
+            onTap: () {
+              // Navigate to payment
+              // context.router.push(const PaymentRoute());
+            },
           ),
 
           ProfileStyles.menuSpacing,
 
           _buildMenuItem(
             title: "Support",
-            onTap: () {},
+            onTap: () {
+              // Navigate to support
+              // context.router.push(const SupportRoute());
+            },
           ),
 
           const Spacer(),
 
+          // Sign Out Button
           TextButton(
             onPressed: () {
               _showSignOutDialog(context);
             },
             style: ProfileStyles.signOutButtonStyle,
-            child: const Text(
+            child: Text(
               "Sign Out",
               style: ProfileStyles.signOutTextStyle,
             ),
@@ -228,7 +216,7 @@ class _ProfileState extends State<Profile> {
                 style: ProfileStyles.menuItemTextStyle,
               ),
             ),
-            const Icon(
+            Icon(
               Icons.chevron_right,
               color: ProfileStyles.chevronColor,
               size: ProfileStyles.chevronSize,
@@ -240,6 +228,9 @@ class _ProfileState extends State<Profile> {
   }
 
   void _showSignOutDialog(BuildContext context) {
+    final userBloc = context.read<UserProfileBloc>();
+    final currentUser = userBloc.currentUser;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -256,9 +247,9 @@ class _ProfileState extends State<Profile> {
               color: Colors.black87,
             ),
           ),
-          content: const Text(
-            "Are you sure you want to sign out?",
-            style: TextStyle(
+          content: Text(
+            "Are you sure you want to sign out${currentUser != null ? ', ${currentUser.firstName}' : ''}?",
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.black54,
             ),
@@ -278,6 +269,8 @@ class _ProfileState extends State<Profile> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                // Clear user profile data when signing out
+                context.read<UserProfileBloc>().add(const ClearUserProfile());
                 context.router.replaceAll([const SignInRoute()]);
               },
               child: const Text(

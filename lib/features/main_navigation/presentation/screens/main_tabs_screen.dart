@@ -41,7 +41,7 @@ class MainTabNavigator extends StatelessWidget {
                       'assets/icons/home.svg',
                       colorFilter: ColorFilter.mode(Colors.purple[700]!, BlendMode.srcIn),
                     ),
-                    label: 'Home',
+                    label: '',
                   ),
                   BottomNavigationBarItem(
                     icon: SvgPicture.asset(
@@ -52,7 +52,7 @@ class MainTabNavigator extends StatelessWidget {
                       'assets/icons/notifications.svg',
                       colorFilter: ColorFilter.mode(Colors.purple[700]!, BlendMode.srcIn),
                     ),
-                    label: 'Notifications',
+                    label: '',
                   ),
                   BottomNavigationBarItem(
                     icon: SvgPicture.asset(
@@ -63,7 +63,7 @@ class MainTabNavigator extends StatelessWidget {
                       'assets/icons/cart.svg',
                       colorFilter: ColorFilter.mode(Colors.purple[700]!, BlendMode.srcIn),
                     ),
-                    label: 'Cart',
+                    label: '',
                   ),
                   BottomNavigationBarItem(
                     icon: SvgPicture.asset(
@@ -74,7 +74,7 @@ class MainTabNavigator extends StatelessWidget {
                       'assets/icons/profile.svg',
                       colorFilter: ColorFilter.mode(Colors.purple[700]!, BlendMode.srcIn),
                     ),
-                    label: 'Profile',
+                    label: '',
                   ),
                 ],
               );

@@ -82,7 +82,7 @@ class ProfileStyles {
 
   static const TextStyle signOutTextStyle = TextStyle(
     fontSize: 16,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w800,
     color: signOutColor,
   );
 
