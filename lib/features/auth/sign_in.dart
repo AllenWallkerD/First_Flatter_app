@@ -49,7 +49,6 @@ class _SignInState extends State<SignIn> {
                   setState(() => _errorMessage = "Please enter a valid email");
                   return;
                 }
-                // Always navigate—actual “not found” handled on password step
                 context.router.push(SignInPasswordRoute(email: email));
               },
             ),

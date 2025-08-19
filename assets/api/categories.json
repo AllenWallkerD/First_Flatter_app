@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Hoodies",
+    "image": "assets/images/categories/Hoodies.png"
+  },
+  {
+    "name": "Shorts",
+    "image": "assets/images/categories/Shorts.png"
+  },
+  {
+    "name": "Shoes",
+    "image": "assets/images/categories/Shoes.png"
+  },
+  {
+    "name": "Bag",
+    "image": "assets/images/categories/Bag.png"
+  },
+  {
+    "name": "Accessories",
+    "image": "assets/images/categories/Accessories.png"
+  }
+]
