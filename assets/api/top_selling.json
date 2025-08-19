@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Men's Harrington Jacket",
+    "image": "assets/images/products/jacket.png",
+    "price": 99.99,
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "description": "Classic Harrington jacket crafted from premium cotton blend fabric. Features a signature tartan lining, ribbed collar and cuffs, and a zip-front closure. Perfect for transitional weather with its lightweight yet durable construction. The timeless design makes it a versatile piece for both casual and smart-casual occasions.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original tags attached. Items must be in original condition for exchange or refund.",
+    "colors": ["Navy", "Black", "Olive Green", "Burgundy"]
+  },
+  {
+    "id": 2,
+    "name": "Max Cirro Men's Slides",
+    "image": "assets/images/products/slides.png",
+    "price": 45.50,
+    "sizes": ["7", "8", "9", "10", "11", "12", "13"],
+    "description": "Comfortable and stylish slides featuring premium synthetic leather upper with embossed logo detailing. Ultra-soft foam footbed provides all-day comfort while the durable rubber outsole ensures excellent grip. Perfect for poolside relaxation, gym sessions, or casual everyday wear.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original tags attached. Items must be in original condition for exchange or refund.",
+    "colors": ["Black", "White", "Navy", "Gray"]
+  },
+  {
+    "id": 3,
+    "name": "Men's Coaches Jacket",
+    "image": "assets/images/products/coach.png",
+    "price": 129.00,
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "description": "Professional coaches jacket made from water-resistant nylon fabric. Features snap-button front closure, side pockets, and an adjustable drawstring hem. Lined interior provides extra warmth while maintaining breathability. Essential outerwear for sports enthusiasts and casual wear alike.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original tags attached. Items must be in original condition for exchange or refund.",
+    "colors": ["Black", "Navy", "Forest Green", "Charcoal"]
+  },
+  {
+    "id": 4,
+    "name": "Portable Bluetooth Speaker",
+    "image": "assets/images/products/jacket.png",
+    "price": 60.75,
+    "sizes": ["One Size"],
+    "description": "Compact wireless speaker delivering powerful 360-degree sound with deep bass. Features 12-hour battery life, IPX7 waterproof rating, and easy Bluetooth 5.0 connectivity. Built-in microphone for hands-free calls and voice assistant compatibility. Perfect for outdoor adventures, home use, or travel.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original packaging. Electronics must be in working condition with all accessories included.",
+    "colors": ["Matte Black", "Ocean Blue", "Coral Red", "Stone Gray"]
+  }
+]

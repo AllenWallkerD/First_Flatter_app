@@ -9,6 +9,11 @@ import '../features/auth/reset_password.dart';
 import '../features/home/home.dart';
 import '../features/home/about.dart';
 import '../features/home/category/categories_list.dart';
+import '../features/main_navigation/presentation/screens/main_tabs_screen.dart';
+import '../features/notifications/notifications_page.dart';
+import '../features/cart/cart_page.dart';
+import '../features/profile/profile_page.dart';
+import '../features/home/see_all_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -42,8 +47,14 @@ class AppRouter extends _$AppRouter {
       page: ResetPasswordRoute.page,
     ),
     AutoRoute(
-      path: '/home',
-      page: HomePageRoute.page,
+      path: '/main',
+      page: MainTabNavigatorRoute.page,
+      children: [
+        AutoRoute(path: '', page: HomeRoute.page),
+        AutoRoute(path: 'notifications', page: NotificationsRoute.page),
+        AutoRoute(path: 'cart', page: CartRoute.page),
+        AutoRoute(path: 'profile', page: ProfileRoute.page),
+      ],
     ),
     AutoRoute(
       path: '/about',
@@ -52,6 +63,10 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: '/categories-list',
       page: CategoriesListRoute.page,
+    ),
+    AutoRoute(
+      path: '/see-all-page/:type',
+      page: SeeAllPageRoute.page,
     ),
   ];
 }

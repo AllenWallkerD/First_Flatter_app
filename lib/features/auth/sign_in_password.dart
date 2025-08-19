@@ -65,7 +65,7 @@ class _SignInPasswordState extends State<SignInPassword> {
                     email: widget.email,
                     password: pwd,
                   );
-                  context.router.replace(const HomePageRoute());
+                  context.router.replace(const HomeRoute());
                 } on FirebaseAuthException catch (e) {
                   setState(() => _errorMessage = _mapErrorCode(e));
                 }

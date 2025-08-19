@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const About(),
       );
     },
+    CartRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Cart(),
+      );
+    },
     CategoriesListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -39,16 +45,47 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ForgotPassword(),
       );
     },
-    HomePageRoute.name: (routeData) {
+    HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const HomePage(),
+        child: const Home(),
+      );
+    },
+    MainTabNavigatorRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainTabNavigator(),
+      );
+    },
+    NotificationsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Notifications(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Profile(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ResetPassword(),
+      );
+    },
+    SeeAllPageRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<SeeAllPageRouteArgs>(
+          orElse: () =>
+              SeeAllPageRouteArgs(type: pathParams.getString('type')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SeeAllPage(
+          type: args.type,
+          key: args.key,
+        ),
       );
     },
     SignInRoute.name: (routeData) {
@@ -86,6 +123,20 @@ class AboutRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AboutRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Cart]
+class CartRoute extends PageRouteInfo<void> {
+  const CartRoute({List<PageRouteInfo>? children})
+      : super(
+          CartRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CartRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -133,15 +184,57 @@ class ForgotPasswordRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomePage]
-class HomePageRoute extends PageRouteInfo<void> {
-  const HomePageRoute({List<PageRouteInfo>? children})
+/// [Home]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
       : super(
-          HomePageRoute.name,
+          HomeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomePageRoute';
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MainTabNavigator]
+class MainTabNavigatorRoute extends PageRouteInfo<void> {
+  const MainTabNavigatorRoute({List<PageRouteInfo>? children})
+      : super(
+          MainTabNavigatorRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainTabNavigatorRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Notifications]
+class NotificationsRoute extends PageRouteInfo<void> {
+  const NotificationsRoute({List<PageRouteInfo>? children})
+      : super(
+          NotificationsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NotificationsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Profile]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -158,6 +251,45 @@ class ResetPasswordRoute extends PageRouteInfo<void> {
   static const String name = 'ResetPasswordRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SeeAllPage]
+class SeeAllPageRoute extends PageRouteInfo<SeeAllPageRouteArgs> {
+  SeeAllPageRoute({
+    required String type,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SeeAllPageRoute.name,
+          args: SeeAllPageRouteArgs(
+            type: type,
+            key: key,
+          ),
+          rawPathParams: {'type': type},
+          initialChildren: children,
+        );
+
+  static const String name = 'SeeAllPageRoute';
+
+  static const PageInfo<SeeAllPageRouteArgs> page =
+      PageInfo<SeeAllPageRouteArgs>(name);
+}
+
+class SeeAllPageRouteArgs {
+  const SeeAllPageRouteArgs({
+    required this.type,
+    this.key,
+  });
+
+  final String type;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SeeAllPageRouteArgs{type: $type, key: $key}';
+  }
 }
 
 /// generated route for

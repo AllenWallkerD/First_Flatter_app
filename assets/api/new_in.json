@@ -1,0 +1,42 @@
+[
+  {
+    "id": 5,
+    "name": "Smart Home Hub",
+    "image": "assets/images/products/new_in1.png",
+    "price": 149.90,
+    "sizes": ["One Size"],
+    "description": "Advanced smart home hub that connects and controls all your IoT devices from one central location. Features voice control compatibility with Alexa and Google Assistant, wireless connectivity for up to 100 devices, and intuitive mobile app control. Easy setup with step-by-step guided installation.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original packaging. Electronics must be in working condition with all accessories included.",
+    "colors": ["Arctic White", "Space Gray", "Midnight Black"]
+  },
+  {
+    "id": 6,
+    "name": "Noise-Cancelling Earbuds",
+    "image": "assets/images/products/new_in2.png",
+    "price": 89.00,
+    "sizes": ["One Size"],
+    "description": "Premium wireless earbuds with active noise cancellation technology. Delivers crystal-clear audio with deep bass and crisp highs. Features 8-hour playback with charging case extending to 32 hours total. IPX5 water resistance and quick-charge capability (15 minutes = 2 hours playback).",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original packaging. Electronics must be in working condition with all accessories included.",
+    "colors": ["Pearl White", "Jet Black", "Rose Gold", "Deep Blue"]
+  },
+  {
+    "id": 7,
+    "name": "Foldable Keyboard",
+    "image": "assets/images/products/new_in1.png",
+    "price": 39.99,
+    "sizes": ["One Size"],
+    "description": "Ultra-portable foldable keyboard that transforms your mobile device into a productivity powerhouse. Compact design folds to pocket size while providing full QWERTY layout when expanded. Rechargeable battery lasts up to 3 months, compatible with iOS, Android, and Windows devices.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original packaging. Electronics must be in working condition with all accessories included.",
+    "colors": ["Silver", "Space Gray", "Rose Gold"]
+  },
+  {
+    "id": 8,
+    "name": "Mini Projector",
+    "image": "assets/images/products/new_in2.png",
+    "price": 110.25,
+    "sizes": ["One Size"],
+    "description": "Compact portable projector perfect for presentations, movie nights, and gaming. Supports 1080p HD resolution with LED lamp lasting up to 50,000 hours. Multiple connectivity options including HDMI, USB, and wireless screen mirroring. Includes carrying case and all necessary cables.",
+    "shipping_returns": "Free standard shipping on orders over $75. Express shipping available for $9.99. 30-day free returns with original packaging. Electronics must be in working condition with all accessories included.",
+    "colors": ["Classic White", "Matte Black", "Silver"]
+  }
+]

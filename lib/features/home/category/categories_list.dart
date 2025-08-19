@@ -12,7 +12,12 @@ class CategoriesList extends StatelessWidget {
     final jsonString = await rootBundle.loadString('assets/api/categories.json');
     final List data = json.decode(jsonString) as List;
     return data
-        .map((e) => CategoryModel(name: e['name'], image: e['image']))
+        .map<CategoryModel>((e) => CategoryModel(
+      id: e['id']?.toString() ?? '',
+      name: e['name'] ?? '',
+      image: e['image'] ?? '',
+      slug: e['slug']?.toString() ?? '',
+    ))
         .toList();
   }
 
