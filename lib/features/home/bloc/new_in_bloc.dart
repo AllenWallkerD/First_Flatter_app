@@ -11,7 +11,10 @@ class NewInLoaded extends NewInState {
   final List<ProductModel> items;
   NewInLoaded(this.items);
 }
-class NewInError extends NewInState {}
+class NewInError extends NewInState {
+  final String message;
+  NewInError(this.message);
+}
 
 class NewInBloc extends Bloc<NewInEvent, NewInState> {
   final Product product;
@@ -20,10 +23,10 @@ class NewInBloc extends Bloc<NewInEvent, NewInState> {
     on<LoadNewIn>((event, emit) async {
       try {
         emit(NewInLoading());
-        final products = await product.getNewInProducts();
-        emit(NewInLoaded(products));
+        final response = await product.getAllProducts(page: 1, limit: 10);
+        emit(NewInLoaded(response.products));
       } catch (e) {
-        emit(NewInError());
+        emit(NewInError(e.toString()));
       }
     });
   }

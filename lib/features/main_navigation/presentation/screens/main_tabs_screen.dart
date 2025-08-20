@@ -19,7 +19,7 @@ class MainTabNavigator extends StatelessWidget {
             routes: const [
               HomeRoute(),
               NotificationsRoute(),
-              CartRoute(),
+              OrdersRoute(),
               ProfileRoute(),
             ],
             bottomNavigationBuilder: (_, tabsRouter) {

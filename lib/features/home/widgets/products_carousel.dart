@@ -22,7 +22,6 @@ class ProductsCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Dynamic sizing
     final dynamicItemWidth = itemWidth ?? screenWidth * 0.45;
     final dynamicImageHeight = imageHeight ?? dynamicItemWidth * 1.2;
 

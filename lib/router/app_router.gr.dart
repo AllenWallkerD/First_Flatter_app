@@ -63,6 +63,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const Notifications(),
       );
     },
+    OrdersRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Orders(),
+      );
+    },
     ProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -221,6 +227,20 @@ class NotificationsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'NotificationsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Orders]
+class OrdersRoute extends PageRouteInfo<void> {
+  const OrdersRoute({List<PageRouteInfo>? children})
+      : super(
+          OrdersRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OrdersRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

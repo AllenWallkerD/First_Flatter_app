@@ -90,42 +90,6 @@ class UserApiService {
     }
   }
 
-  Future<ApiResponse<List<UserProfile>>> getUsersByNationality({
-    required String nationality,
-    int count = 10,
-  }) async {
-    try {
-      final uri = Uri.parse('$_baseUrl?results=$count&nat=$nationality');
-      final response = await _client
-          .get(
-        uri,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      )
-          .timeout(_timeout);
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        final List<dynamic> results = data['results'] ?? [];
-
-        final List<UserProfile> users = results
-            .map((userData) => UserProfile.fromJson(userData))
-            .toList();
-
-        return ApiResponse.success(users);
-      } else {
-        return ApiResponse.error(
-          'Failed to fetch users: ${response.statusCode}',
-          statusCode: response.statusCode,
-        );
-      }
-    } catch (e) {
-      return ApiResponse.error(_getErrorMessage(e));
-    }
-  }
-
   ApiResponse<UserProfile> _handleResponse(http.Response response) {
     if (response.statusCode == 200) {
       try {
