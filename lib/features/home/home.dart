@@ -81,7 +81,6 @@ class ProductsCarousel extends StatelessWidget {
   }
 }
 
-@RoutePage()
 class Home extends StatelessWidget {
   const Home({super.key});
 

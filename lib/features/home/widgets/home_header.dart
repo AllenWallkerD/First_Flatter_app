@@ -62,7 +62,7 @@ class _HomeHeaderState extends State<HomeHeader> {
 
           InkWell(
             onTap: () {
-              context.router.push(const CartRoute());
+                                context.router.push(const CartPageRoute());
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),

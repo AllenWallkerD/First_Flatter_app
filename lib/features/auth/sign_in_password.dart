@@ -66,7 +66,7 @@ class _SignInPasswordState extends State<SignInPassword> {
       if (userResult.success && userResult.data != null) {
         if (mounted) {
           context.read<UserProfileBloc>().add(SetUserProfile(userResult.data!));
-          context.router.replace(const HomeRoute());
+                        context.router.replace(const HomePageRoute());
         }
       } else {
         setState(() {

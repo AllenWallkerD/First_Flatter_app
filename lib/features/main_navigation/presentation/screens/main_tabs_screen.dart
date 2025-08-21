@@ -17,9 +17,9 @@ class MainTabNavigator extends StatelessWidget {
         builder: (context, activeTab) {
           return AutoTabsScaffold(
             routes: const [
-              HomeRoute(),
-              NotificationsRoute(),
-              OrdersRoute(),
+                                HomePageRoute(),
+                  NotificationsRoute(),
+                  OrdersPageRoute(),
               ProfileRoute(),
             ],
             bottomNavigationBuilder: (_, tabsRouter) {
