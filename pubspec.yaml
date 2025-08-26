@@ -19,6 +19,7 @@ dependencies:
   # Network & Storage
   dio: ^5.4.0
   shared_preferences: ^2.2.2
+  cached_network_image: ^3.3.0
   
   # Additional utilities
   logger: ^2.0.2+1

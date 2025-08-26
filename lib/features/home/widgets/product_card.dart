@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/product_model.dart';
+import '../../../data/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel item;
@@ -17,13 +17,44 @@ class ProductCard extends StatelessWidget {
             Expanded(child: Image.asset(item.image, fit: BoxFit.cover)),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(item.name,
+              child: Text(item.title,
                   maxLines: 2, overflow: TextOverflow.ellipsis),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8, bottom: 8),
-              child: Text('\$${item.price.toStringAsFixed(2)}',
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              child: Row(
+                children: [
+                  Text('\$${item.price.toStringAsFixed(2)}',
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  if (item.hasDiscount) ...[
+                    const SizedBox(width: 4),
+                    Text(
+                      '\$${item.originalPrice.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+                      decoration: BoxDecoration(
+                        color: Colors.red[100],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: Text(
+                        '-${item.discountPercentage.toInt()}%',
+                        style: TextStyle(
+                          fontSize: 8,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red[700],
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
             ),
           ],
         ),

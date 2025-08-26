@@ -121,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
                 child: _SectionTitle(
                   title: 'Top Selling',
                   onSeeAllTap: () {
-                    context.router.push(const TopSellingPageRoute());
+                    context.router.push(ProductsGridPageRoute(type: 'top-selling'));
                   },
                 ),
               ),
@@ -185,7 +185,7 @@ class _HomeViewState extends State<HomeView> {
                 child: _SectionTitle(
                   title: 'New In',
                   onSeeAllTap: () {
-                    context.router.push(const NewInPageRoute());
+                    context.router.push(ProductsGridPageRoute(type: 'new-in'));
                   },
                 ),
               ),
@@ -276,7 +276,7 @@ class CategoriesSection extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => context.router.push(const CategoryListPageRoute()),
+                onPressed: () => context.router.push(const CategoriesListRoute()),
                 child: const Text(
                   'See All',
                   style: TextStyle(

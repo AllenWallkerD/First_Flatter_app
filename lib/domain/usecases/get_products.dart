@@ -10,7 +10,8 @@ class GetTopSellingProducts {
   GetTopSellingProducts(this.repository);
 
   Future<Either<Failure, PaginatedResult<Product>>> call(PaginationParams params) async {
-    return await repository.getTopSellingProducts(params);
+    final result = await repository.getTopSellingProducts(params);
+    return result;
   }
 }
 
@@ -20,6 +21,7 @@ class GetNewInProducts {
   GetNewInProducts(this.repository);
 
   Future<Either<Failure, List<Product>>> call({int limit = 10}) async {
-    return await repository.getNewInProducts(limit: limit);
+    final result = await repository.getNewInProducts(limit: limit);
+    return result;
   }
 }

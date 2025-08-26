@@ -72,8 +72,12 @@ class NewInBloc extends Bloc<NewInEvent, NewInState> {
     final result = await getNewInProducts(limit: event.limit);
 
     result.fold(
-      (failure) => emit(NewInError(failure.message)),
-      (products) => emit(NewInLoaded(products)),
+      (failure) {
+        emit(NewInError(failure.message));
+      },
+      (products) {
+        emit(NewInLoaded(products));
+      },
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/models/category_model.dart';
+import '../../../data/models/category_model.dart';
 
 class CategoriesCarousel extends StatelessWidget {
   final List<CategoryModel> categories;
@@ -63,7 +63,7 @@ class CategoriesCarousel extends StatelessWidget {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(color: Colors.grey[200], shape: BoxShape.circle),
-                      child: ClipOval(child: _buildImage(c.image)),
+                      child: ClipOval(child: _buildImage(c.imageUrl ?? '')),
                     ),
                     SizedBox(height: 8),
                     SizedBox(

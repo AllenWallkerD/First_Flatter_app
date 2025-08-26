@@ -106,12 +106,16 @@ class TopSellingBloc extends Bloc<TopSellingEvent, TopSellingState> {
     final result = await getTopSellingProducts(params);
 
     result.fold(
-      (failure) => emit(TopSellingError(failure.message)),
-      (paginatedResult) => emit(TopSellingLoaded(
-        products: paginatedResult.items,
-        hasReachedMax: !paginatedResult.hasNextPage,
-        currentPage: paginatedResult.currentPage,
-      )),
+      (failure) {
+        emit(TopSellingError(failure.message));
+      },
+      (paginatedResult) {
+        emit(TopSellingLoaded(
+          products: paginatedResult.items,
+          hasReachedMax: !paginatedResult.hasNextPage,
+          currentPage: paginatedResult.currentPage,
+        ));
+      },
     );
   }
 

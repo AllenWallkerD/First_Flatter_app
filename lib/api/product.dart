@@ -1,5 +1,5 @@
 import 'package:app/api/api_client.dart';
-import 'package:app/models/product_model.dart';
+import '../data/models/product_model.dart';
 
 class ProductsResponse {
   final List<ProductModel> products;

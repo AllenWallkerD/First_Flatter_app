@@ -12,7 +12,8 @@ class ProductModel extends Product {
     super.model,
     super.color,
     super.discount,
-    super.originalPrice,
+    super.onSale,
+    super.popular,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -26,8 +27,9 @@ class ProductModel extends Product {
       brand: json['brand'],
       model: json['model'],
       color: json['color'],
-      discount: _parseBool(json['discount']),
-      originalPrice: _parseDouble(json['originalPrice']),
+      discount: _parseInt(json['discount']),
+      onSale: _parseBool(json['onSale']),
+      popular: _parseBool(json['popular']),
     );
   }
 
@@ -43,7 +45,8 @@ class ProductModel extends Product {
       'model': model,
       'color': color,
       'discount': discount,
-      'originalPrice': originalPrice,
+      'onSale': onSale,
+      'popular': popular,
     };
   }
 
@@ -59,7 +62,8 @@ class ProductModel extends Product {
       model: product.model,
       color: product.color,
       discount: product.discount,
-      originalPrice: product.originalPrice,
+      onSale: product.onSale,
+      popular: product.popular,
     );
   }
 
@@ -69,6 +73,14 @@ class ProductModel extends Product {
     if (value is int) return value.toDouble();
     if (value is String) return double.tryParse(value) ?? 0.0;
     return 0.0;
+  }
+
+  static int? _parseInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is double) return value.toInt();
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 
   static bool? _parseBool(dynamic value) {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/user_model.dart';
+import '../data/models/user_model.dart';
 
 class ApiResponse<T> {
   final bool success;
@@ -41,9 +41,10 @@ class UserApiService {
 
   Future<ApiResponse<UserProfile>> getRandomUser() async {
     try {
+      final uri = Uri.parse(_baseUrl);
       final response = await _client
           .get(
-        Uri.parse(_baseUrl),
+        uri,
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

@@ -10,8 +10,9 @@ class Product extends Equatable {
   final String? brand;
   final String? model;
   final String? color;
-  final bool? discount;
-  final double? originalPrice;
+  final int? discount;
+  final bool? onSale;
+  final bool? popular;
 
   const Product({
     required this.id,
@@ -24,15 +25,18 @@ class Product extends Equatable {
     this.model,
     this.color,
     this.discount,
-    this.originalPrice,
+    this.onSale,
+    this.popular,
   });
 
-  bool get hasDiscount => discount == true && originalPrice != null && originalPrice! > price;
+  bool get hasDiscount => discount != null && discount! > 0;
 
-  double get discountPercentage {
-    if (!hasDiscount) return 0.0;
-    return ((originalPrice! - price) / originalPrice!) * 100;
+  double get originalPrice {
+    if (!hasDiscount) return price;
+    return price / (1 - (discount! / 100));
   }
+
+  double get discountPercentage => discount?.toDouble() ?? 0.0;
 
   @override
   List<Object?> get props => [
@@ -46,6 +50,7 @@ class Product extends Equatable {
         model,
         color,
         discount,
-        originalPrice,
+        onSale,
+        popular,
       ];
 }

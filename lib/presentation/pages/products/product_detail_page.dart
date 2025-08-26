@@ -131,17 +131,79 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                           if (widget.product.hasDiscount) ...[
                             const SizedBox(width: 12),
                             Text(
-                              '\$${widget.product.originalPrice!.toStringAsFixed(0)}',
+                              '\$${widget.product.originalPrice.toStringAsFixed(0)}',
                               style: TextStyle(
                                 fontSize: 16,
                                 decoration: TextDecoration.lineThrough,
                                 color: Colors.grey[500],
                               ),
                             ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.red[100],
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                '-${widget.product.discountPercentage.toInt()}%',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red[700],
+                                ),
+                              ),
+                            ),
                           ],
                         ],
                       ),
                       const SizedBox(height: 24),
+                      
+                      // Brand and Model (if available)
+                      if (widget.product.brand != null || widget.product.model != null) ...[
+                        if (widget.product.brand != null) ...[
+                          Row(
+                            children: [
+                              const Text(
+                                'Brand: ',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                widget.product.brand!,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                        if (widget.product.model != null) ...[
+                          Row(
+                            children: [
+                              const Text(
+                                'Model: ',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                widget.product.model!,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ],
                       
                       // Size Selector (only show if mobile category)
                       if (widget.product.category.toLowerCase() == 'mobile') ...[
@@ -198,6 +260,14 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
+                                Text(
+                                  widget.product.color!,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
                                 const Icon(Icons.keyboard_arrow_down, size: 20),
                               ],
                             ),
@@ -277,85 +347,70 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                       const SizedBox(height: 32),
                       
                       // Product Description
-                      Text(
-                        widget.product.description,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[700],
-                          height: 1.5,
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      
-                      // Shipping & Returns
-                      const Text(
-                        'Shipping & Returns',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Free standard shipping and free 60-day returns',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      
-                      // Reviews Section
-                      const Text(
-                        'Reviews',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      const Row(
-                        children: [
-                          Text(
-                            '4.5 ',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      if (widget.product.description.isNotEmpty) ...[
+                        const Text(
+                          'Description',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                          Text(
-                            'Ratings',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '213 Reviews',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
                         ),
-                      ),
-                      const SizedBox(height: 16),
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.product.description,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[700],
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                      ],
                       
-                      // Mock Reviews
-                      _buildReviewItem(
-                        'Alex Morgan',
-                        'Great product with excellent build quality. Highly recommended for anyone looking for premium features.',
-                        3,
-                        '12days ago',
-                      ),
-                      const SizedBox(height: 16),
-                      _buildReviewItem(
-                        'Sarah Johnson',
-                        'Amazing value for money. The design is sleek and performance is outstanding.',
-                        5,
-                        '1 week ago',
-                      ),
+                      // Product Status Badges
+                      if (widget.product.onSale == true || widget.product.popular == true) ...[
+                        Row(
+                          children: [
+                            if (widget.product.onSale == true) ...[
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: Colors.red[100],
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  'On Sale',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red[700],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                            ],
+                            if (widget.product.popular == true) ...[
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: Colors.orange[100],
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  'Popular',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.orange[700],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                        const SizedBox(height: 32),
+                      ],
+                      
                       const SizedBox(height: 100), // Space for bottom button
                     ],
                   ),
@@ -379,112 +434,59 @@ class _ProductDetailViewState extends State<ProductDetailView> {
         ),
         child: Row(
           children: [
-            Text(
-              '\$${(widget.product.price * _quantity).toStringAsFixed(0)}',
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  for (int i = 0; i < _quantity; i++) {
-                    context.read<CartBloc>().add(
-                      AddProductToCart(widget.product),
-                    );
-                  }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('${widget.product.title} added to cart'),
-                      duration: const Duration(seconds: 2),
-                    ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {
+                for (int i = 0; i < _quantity; i++) {
+                  context.read<CartBloc>().add(
+                    AddProductToCart(widget.product),
                   );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('${widget.product.title} added to cart'),
+                    duration: const Duration(seconds: 2),
                   ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
                 ),
-                child: const Text(
-                  'Add to Bag',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20), // horizontal padding
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '\$${(widget.product.price * _quantity).toStringAsFixed(0)}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Text(
+                        'Add to Bag',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+          ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildReviewItem(String name, String review, int rating, String timeAgo) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.grey[300],
-          child: Text(
-            name[0],
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Row(
-                    children: List.generate(rating, (index) => 
-                      const Icon(
-                        Icons.star,
-                        size: 16,
-                        color: Colors.purple,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Text(
-                review,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[700],
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                timeAgo,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey[500],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 

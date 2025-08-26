@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/api/api_client.dart';
 import 'package:app/api/category.dart';
-import 'package:app/models/category_model.dart';
+import '../../../data/models/category_model.dart';
 
 abstract class CategoriesListEvent {}
 class LoadCategoriesList extends CategoriesListEvent {}
@@ -154,7 +154,7 @@ class CategoriesList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: ListTile(
-                                leading: ClipOval(child: _buildImage(c.image)),
+                                leading: ClipOval(child: _buildImage(c.imageUrl ?? '')),
                                 title: Text(c.name),
                                 trailing: Icon(Icons.arrow_forward_ios, size: 16),
                                 onTap: () {

@@ -1,5 +1,5 @@
 import 'package:app/api/api_client.dart';
-import 'package:app/models/category_model.dart';
+import '../data/models/category_model.dart';
 
 class Category {
   final ApiClient apiClient;
@@ -23,10 +23,10 @@ class Category {
       return categoryNames.map((name) {
         final lowerCaseName = name.toLowerCase();
         return CategoryModel(
-          id: lowerCaseName,
-          name: _formatCategoryName(name),
-          image: _categoryImages[lowerCaseName] ?? _defaultImage,
-          slug: lowerCaseName,
+          name: lowerCaseName,
+          displayName: _formatCategoryName(name),
+          description: 'Products in ${_formatCategoryName(name)} category',
+          imageUrl: _categoryImages[lowerCaseName] ?? _defaultImage,
         );
       }).toList();
     } catch (e) {

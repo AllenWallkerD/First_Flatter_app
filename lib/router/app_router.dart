@@ -15,10 +15,8 @@ import '../features/home/see_all_page.dart';
 import '../presentation/pages/home/home_page.dart';
 import '../presentation/pages/cart/cart_page.dart';
 import '../presentation/pages/orders/orders_page.dart';
-import '../presentation/pages/category/category_list_page.dart';
 import '../presentation/pages/category/category_products_page.dart';
-import '../presentation/pages/products/top_selling_page.dart';
-import '../presentation/pages/products/new_in_page.dart';
+import '../presentation/pages/products/products_grid_page.dart';
 import '../presentation/pages/products/product_detail_page.dart';
 import '../domain/entities/product.dart';
 
@@ -80,20 +78,12 @@ class AppRouter extends _$AppRouter {
       page: SeeAllPageRoute.page,
     ),
     AutoRoute(
-      path: '/category-list',
-      page: CategoryListPageRoute.page,
-    ),
-    AutoRoute(
       path: '/category-products',
       page: CategoryProductsPageRoute.page,
     ),
     AutoRoute(
-      path: '/top-selling',
-      page: TopSellingPageRoute.page,
-    ),
-    AutoRoute(
-      path: '/new-in',
-      page: NewInPageRoute.page,
+      path: '/products-grid/:type',
+      page: ProductsGridPageRoute.page,
     ),
     AutoRoute(
       path: '/product-detail',

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/user_profile/user_profile_bloc.dart';
 import '../../bloc/user_profile/user_profile_event.dart';
 import '../../bloc/user_profile/user_profile_state.dart';
-import '../../models/user_model.dart';
+import '../../data/models/user_model.dart';
 import './styles/profile_styles.dart';
 import '../../router/app_router.dart';
 
@@ -243,7 +243,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           content: Text(
-            "Are you sure you want to sign out${currentUser != null ? ', ${currentUser.firstName}' : ''}?",
+            "Are you sure you want to sign out${currentUser != null ? ', ${currentUser.fullName.split(' ').first}' : ''}?",
             style: const TextStyle(
               fontSize: 16,
               color: Colors.black54,
