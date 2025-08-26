@@ -5,12 +5,19 @@ import 'firebase_options.dart';
 
 import 'router/app_router.dart';
 import 'bloc/user_profile/user_profile_bloc.dart';
+import 'core/di/injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  
+  // Initialize dependency injection
+  await di.init();
+  
   runApp(const MyApp());
 }
 

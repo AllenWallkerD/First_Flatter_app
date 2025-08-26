@@ -6,14 +6,19 @@ import '../features/auth/sign_in_password.dart';
 import '../features/auth/create_account.dart';
 import '../features/auth/forgot_password.dart';
 import '../features/auth/reset_password.dart';
-import '../features/home/home.dart';
 import '../features/home/about.dart';
 import '../features/home/category/categories_list.dart';
 import '../features/main_navigation/presentation/screens/main_tabs_screen.dart';
 import '../features/notifications/notifications_page.dart';
-import '../features/cart/cart_page.dart';
 import '../features/profile/profile_page.dart';
 import '../features/home/see_all_page.dart';
+import '../presentation/pages/home/home_page.dart';
+import '../presentation/pages/cart/cart_page.dart';
+import '../presentation/pages/orders/orders_page.dart';
+import '../presentation/pages/category/category_products_page.dart';
+import '../presentation/pages/products/products_grid_page.dart';
+import '../presentation/pages/products/product_detail_page.dart';
+import '../domain/entities/product.dart';
 
 part 'app_router.gr.dart';
 
@@ -50,11 +55,15 @@ class AppRouter extends _$AppRouter {
       path: '/main',
       page: MainTabNavigatorRoute.page,
       children: [
-        AutoRoute(path: '', page: HomeRoute.page),
+        AutoRoute(path: '', page: HomePageRoute.page),
         AutoRoute(path: 'notifications', page: NotificationsRoute.page),
-        AutoRoute(path: 'cart', page: CartRoute.page),
+        AutoRoute(path: 'orders', page: OrdersPageRoute.page),
         AutoRoute(path: 'profile', page: ProfileRoute.page),
       ],
+    ),
+    AutoRoute(
+      path: '/cart',
+      page: CartPageRoute.page,
     ),
     AutoRoute(
       path: '/about',
@@ -67,6 +76,18 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: '/see-all-page/:type',
       page: SeeAllPageRoute.page,
+    ),
+    AutoRoute(
+      path: '/category-products',
+      page: CategoryProductsPageRoute.page,
+    ),
+    AutoRoute(
+      path: '/products-grid/:type',
+      page: ProductsGridPageRoute.page,
+    ),
+    AutoRoute(
+      path: '/product-detail',
+      page: ProductDetailPageRoute.page,
     ),
   ];
 }

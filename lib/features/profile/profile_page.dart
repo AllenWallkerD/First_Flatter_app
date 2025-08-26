@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/user_profile/user_profile_bloc.dart';
 import '../../bloc/user_profile/user_profile_event.dart';
 import '../../bloc/user_profile/user_profile_state.dart';
-import '../../models/user_model.dart';
+import '../../data/models/user_model.dart';
 import './styles/profile_styles.dart';
 import '../../router/app_router.dart';
 
@@ -149,12 +149,10 @@ class Profile extends StatelessWidget {
 
           ProfileStyles.sectionSpacing,
 
-          // Menu Items
           _buildMenuItem(
             title: "Wishlist",
             onTap: () {
               // Navigate to wishlist
-              // context.router.push(const WishlistRoute());
             },
           ),
 
@@ -164,7 +162,6 @@ class Profile extends StatelessWidget {
             title: "Payment",
             onTap: () {
               // Navigate to payment
-              // context.router.push(const PaymentRoute());
             },
           ),
 
@@ -174,13 +171,11 @@ class Profile extends StatelessWidget {
             title: "Support",
             onTap: () {
               // Navigate to support
-              // context.router.push(const SupportRoute());
             },
           ),
 
           const Spacer(),
 
-          // Sign Out Button
           TextButton(
             onPressed: () {
               _showSignOutDialog(context);
@@ -248,7 +243,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           content: Text(
-            "Are you sure you want to sign out${currentUser != null ? ', ${currentUser.firstName}' : ''}?",
+            "Are you sure you want to sign out${currentUser != null ? ', ${currentUser.fullName.split(' ').first}' : ''}?",
             style: const TextStyle(
               fontSize: 16,
               color: Colors.black54,
@@ -269,7 +264,6 @@ class Profile extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                // Clear user profile data when signing out
                 context.read<UserProfileBloc>().add(const ClearUserProfile());
                 context.router.replaceAll([const SignInRoute()]);
               },

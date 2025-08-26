@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/product_model.dart';
+import '../../../data/models/product_model.dart';
 import 'package:app/components/product_item.dart';
 
 class ProductsCarousel extends StatelessWidget {
@@ -22,7 +22,6 @@ class ProductsCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Dynamic sizing
     final dynamicItemWidth = itemWidth ?? screenWidth * 0.45;
     final dynamicImageHeight = imageHeight ?? dynamicItemWidth * 1.2;
 
@@ -40,10 +39,10 @@ class ProductsCarousel extends StatelessWidget {
             width: dynamicItemWidth,
             imageHeight: dynamicImageHeight,
             onPressed: () {
-              debugPrint('Added ${items[index].name} to cart');
+              debugPrint('Added ${items[index].title} to cart');
             },
             onFavoritePressed: () {
-              debugPrint('Toggled favorite for ${items[index].name}');
+              debugPrint('Toggled favorite for ${items[index].title}');
             },
           );
         },

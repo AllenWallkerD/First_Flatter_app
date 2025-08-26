@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../api/user.dart';
-import '../../models/user_model.dart';
+import '../../data/models/user_model.dart';
 import 'user_profile_event.dart';
 import 'user_profile_state.dart';
 

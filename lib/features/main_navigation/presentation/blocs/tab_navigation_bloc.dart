@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum TabItem { home, notifications, cart, profile }
+enum TabItem { home, notifications, orders, profile }
 
 class TabNavigationEvent {
   final TabItem tab;

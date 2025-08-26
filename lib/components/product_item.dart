@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/models/product_model.dart';
+import '../data/models/product_model.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductModel product;
@@ -172,7 +172,7 @@ class ProductItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            product.name,
+            product.title,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w500,
               height: 1.3,
@@ -182,13 +182,44 @@ class ProductItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 6),
-          Text(
-            '\$${product.price.toStringAsFixed(2)}',
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w900,
-              color: theme.colorScheme.primary,
-              fontSize: 14,
-            ),
+          Row(
+            children: [
+              Text(
+                '\$${product.price.toStringAsFixed(2)}',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w900,
+                  color: theme.colorScheme.primary,
+                  fontSize: 14,
+                ),
+              ),
+              if (product.hasDiscount) ...[
+                const SizedBox(width: 4),
+                Text(
+                  '\$${product.originalPrice.toStringAsFixed(2)}',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    decoration: TextDecoration.lineThrough,
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.red[100],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  child: Text(
+                    '-${product.discountPercentage.toInt()}%',
+                    style: TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red[700],
+                    ),
+                  ),
+                ),
+              ],
+            ],
           ),
         ],
       ),
